@@ -5,11 +5,11 @@
   "main": "build/index.cjs.js",
   "module": "build/index.esm.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && cd playground && npm run build && cd ../ && ncp ./playground/build ./docs",
     "build-watch": "rollup -c -w",
-    "start-playground": "cd playground && npm run start",
+    "dev": "npm-run-all --parallel build-watch start-playground",
     "i-all": "npm i && cd playground && npm i",
-    "dev": "npm-run-all --parallel build-watch start-playground"
+    "start-playground": "cd playground && npm run start"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
+    "ncp": "^2.0.0",
     "node-sass": "^4.13.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.25.0",
