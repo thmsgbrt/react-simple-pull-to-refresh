@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "react-simple-pull-to-refresh-playground",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,5 +33,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://thmsgbrt.github.io/react-simple-pull-to-refresh"
 }

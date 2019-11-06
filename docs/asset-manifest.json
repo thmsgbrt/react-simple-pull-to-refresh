@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/react-simple-pull-to-refresh/static/css/main.2c36170d.chunk.css",
+    "main.js": "/react-simple-pull-to-refresh/static/js/main.9bf6d823.chunk.js",
+    "main.js.map": "/react-simple-pull-to-refresh/static/js/main.9bf6d823.chunk.js.map",
+    "runtime-main.js": "/react-simple-pull-to-refresh/static/js/runtime-main.dd9dbc43.js",
+    "runtime-main.js.map": "/react-simple-pull-to-refresh/static/js/runtime-main.dd9dbc43.js.map",
+    "static/js/2.fa031f80.chunk.js": "/react-simple-pull-to-refresh/static/js/2.fa031f80.chunk.js",
+    "static/js/2.fa031f80.chunk.js.map": "/react-simple-pull-to-refresh/static/js/2.fa031f80.chunk.js.map",
+    "index.html": "/react-simple-pull-to-refresh/index.html",
+    "precache-manifest.2a1d4cb30f002bc6fed4969d364b9330.js": "/react-simple-pull-to-refresh/precache-manifest.2a1d4cb30f002bc6fed4969d364b9330.js",
+    "service-worker.js": "/react-simple-pull-to-refresh/service-worker.js",
+    "static/css/main.2c36170d.chunk.css.map": "/react-simple-pull-to-refresh/static/css/main.2c36170d.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dd9dbc43.js",
+    "static/js/2.fa031f80.chunk.js",
+    "static/css/main.2c36170d.chunk.css",
+    "static/js/main.9bf6d823.chunk.js"
+  ]
+}
