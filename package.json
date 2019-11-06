@@ -1,0 +1,52 @@
+{
+  "name": "react-simple-pull-to-refresh",
+  "version": "1.0.0",
+  "description": "A Simple Pull To Refresh Component for React Application",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "scripts": {
+    "build": "rollup -c",
+    "build-watch": "rollup -c -w",
+    "start-playground": "cd playground && npm run start",
+    "i-all": "npm i && cd playground && npm i",
+    "dev": "npm-run-all --parallel build-watch start-playground"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thmsgbrt/react-simple-pull-to-refresh.git"
+  },
+  "keywords": [
+    "react",
+    "pull to refresh",
+    "js",
+    "mobile"
+  ],
+  "author": "Guibert Thomas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thmsgbrt/react-simple-pull-to-refresh/issues"
+  },
+  "homepage": "https://github.com/thmsgbrt/react-simple-pull-to-refresh#readme",
+  "devDependencies": {
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.2",
+    "node-sass": "^4.13.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.25.0",
+    "rollup-plugin-delete": "^1.1.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "typescript": "^3.6.4"
+  },
+  "peerDependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  },
+  "files": [
+    "build"
+  ],
+  "typings": "build/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
+}

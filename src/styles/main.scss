@@ -1,0 +1,52 @@
+.ptr,
+.ptr__children {
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 1;
+}
+
+.ptr__children,
+.ptr__pull-down {
+  transition: transform 0.2s cubic-bezier(0, 0, 0.31, 1);
+}
+
+.ptr__pull-down {
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  top: 0;
+  visibility: 'hidden';
+  text-align: center;
+  > div {
+    margin: 0 auto;
+  }
+  > .ptr__pull-down--loading {
+    display: none;
+  }
+  > .ptr__pull-down--pull-more {
+    display: none;
+  }
+}
+
+.ptr--dragging {
+  &.ptr--treshold-breached {
+    .ptr__pull-down--pull-more {
+      display: none;
+    }
+  }
+  .ptr__pull-down--pull-more {
+    display: block;
+  }
+}
+
+.ptr--treshold-breached {
+  .ptr__pull-down {
+    opacity: 1 !important;
+  }
+  .ptr__pull-down--loading {
+    display: block;
+  }
+}
