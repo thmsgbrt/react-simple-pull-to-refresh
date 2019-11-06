@@ -9,7 +9,7 @@ A Simple Pull To Refresh Component for React Application with 0 dependencies.
 
 ## Demo
 
-TBD
+[Click here 👍](https://thmsgbrt.github.io/react-simple-pull-to-refresh)
 
 ## installation
 
