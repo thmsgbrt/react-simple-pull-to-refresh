@@ -11,7 +11,7 @@ A Simple Pull To Refresh Component for React Application with 0 dependency.
 
 [Click here 👍](https://thmsgbrt.github.io/react-simple-pull-to-refresh)
 
-## installation
+## Installation
 
 `npm i react-simple-pull-to-refresh`
 
