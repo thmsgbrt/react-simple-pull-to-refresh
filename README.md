@@ -5,7 +5,7 @@
 ![](https://badgen.net/npm/types/react-simple-pull-to-refresh)
 ![](https://badgen.net/badge/maintained/yes/green)
 
-A Simple Pull To Refresh Component for React Application with 0 dependencies.
+A Simple Pull To Refresh Component for React Application with 0 dependency.
 
 ## Demo
 
