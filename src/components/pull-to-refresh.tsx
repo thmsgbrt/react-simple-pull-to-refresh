@@ -64,13 +64,19 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
   const initContainer = (): void => {
     requestAnimationFrame(() => {
-      childrenRef.current!.style.overflowX = 'hidden';
-      childrenRef.current!.style.overflowY = 'auto';
-      // childrenRef.current.style.overflow = 'auto';
-      childrenRef.current!.style.transform = `translate(0px, 0px)`;
-      pullDownRef.current!.style.opacity = '0';
-      containerRef.current!.classList.remove('ptr--treshold-breached');
-      containerRef.current!.classList.remove('ptr--dragging');
+      if (childrenRef.current) {
+        childrenRef.current.style.overflowX = 'hidden';
+        childrenRef.current.style.overflowY = 'auto';
+        // childrenRef.current.style.overflow = 'auto';
+        childrenRef.current.style.transform = `translate(0px, 0px)`;
+      }
+      if (pullDownRef.current) {
+        pullDownRef.current.style.opacity = '0';
+      }
+      if (containerRef.current) {
+        containerRef.current.classList.remove('ptr--treshold-breached');
+        containerRef.current.classList.remove('ptr--dragging');
+      }
     });
   };
 
