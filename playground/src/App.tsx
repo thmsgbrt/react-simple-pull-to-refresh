@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const getNewData = (): void => {
     setTimeout(() => {
       setList([...list, ...FAKE_LIST]);
-    }, 15000);
+    }, 1500);
   };
 
   return (
