@@ -87,7 +87,7 @@ var PullingContent = function () {
         React.createElement("p", null, "\u21A7\u00A0\u00A0pull to refresh\u00A0\u00A0\u21A7")));
 };
 
-var css$1 = ".ptr,\n.ptr__children {\n  height: 100%;\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  position: relative;\n  z-index: 1; }\n\n.ptr__children,\n.ptr__pull-down {\n  transition: transform 0.2s cubic-bezier(0, 0, 0.31, 1); }\n\n.ptr__pull-down {\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  right: 0;\n  top: 0;\n  visibility: 'hidden';\n  text-align: center; }\n  .ptr__pull-down > div {\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--loading {\n    display: none;\n    text-align: center;\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--pull-more {\n    display: none;\n    text-align: center;\n    margin: 0 auto; }\n\n.ptr--dragging.ptr--treshold-breached .ptr__pull-down--pull-more {\n  display: none; }\n\n.ptr--dragging .ptr__pull-down--pull-more {\n  display: block; }\n\n.ptr--treshold-breached .ptr__pull-down {\n  opacity: 1 !important; }\n\n.ptr--treshold-breached .ptr__pull-down--loading {\n  display: block; }\n";
+var css$1 = ".ptr,\n.ptr__children {\n  height: 100%;\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  position: relative;\n  z-index: 1; }\n\n.ptr__children,\n.ptr__pull-down {\n  transition: transform 0.2s cubic-bezier(0, 0, 0.31, 1); }\n\n.ptr__pull-down {\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  right: 0;\n  top: 0;\n  visibility: hidden;\n  text-align: center; }\n  .ptr__pull-down > div {\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--loading {\n    display: none;\n    text-align: center;\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--pull-more {\n    display: none;\n    text-align: center;\n    margin: 0 auto; }\n\n.ptr--dragging.ptr--treshold-breached .ptr__pull-down--pull-more {\n  display: none; }\n\n.ptr--dragging .ptr__pull-down--pull-more {\n  display: block; }\n\n.ptr--treshold-breached .ptr__pull-down {\n  opacity: 1 !important; }\n\n.ptr--treshold-breached .ptr__pull-down--loading {\n  display: block; }\n";
 styleInject(css$1);
 
 var PullToRefresh = function (_a) {
@@ -127,13 +127,19 @@ var PullToRefresh = function (_a) {
     }, [children]);
     var initContainer = function () {
         requestAnimationFrame(function () {
-            childrenRef.current.style.overflowX = 'hidden';
-            childrenRef.current.style.overflowY = 'auto';
-            // childrenRef.current.style.overflow = 'auto';
-            childrenRef.current.style.transform = "translate(0px, 0px)";
-            pullDownRef.current.style.opacity = '0';
-            containerRef.current.classList.remove('ptr--treshold-breached');
-            containerRef.current.classList.remove('ptr--dragging');
+            if (childrenRef.current) {
+                childrenRef.current.style.overflowX = 'hidden';
+                childrenRef.current.style.overflowY = 'auto';
+                // childrenRef.current.style.overflow = 'auto';
+                childrenRef.current.style.transform = "translate(0px, 0px)";
+            }
+            if (pullDownRef.current) {
+                pullDownRef.current.style.opacity = '0';
+            }
+            if (containerRef.current) {
+                containerRef.current.classList.remove('ptr--treshold-breached');
+                containerRef.current.classList.remove('ptr--dragging');
+            }
         });
     };
     var onTouchStart = function (e) {
