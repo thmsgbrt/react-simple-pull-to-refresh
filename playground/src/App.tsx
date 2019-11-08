@@ -6,23 +6,23 @@ const App: React.FC = () => {
   const FAKE_LIST = ['foo', 'bar', 'baz', 'foo'];
   const [list, setList] = useState<string[]>(FAKE_LIST);
 
-  const getNewData = ():void => {
+  const getNewData = (): void => {
     setTimeout(() => {
       setList([...list, ...FAKE_LIST]);
-    }, 1500);
-  }
-  
+    }, 15000);
+  };
+
   return (
     <div className="App">
       <PullToRefresh onRefresh={getNewData}>
         <>
-          <header className="App-header">
-            Pull To Refresh
-          </header>
+          <header className="App-header">Pull To Refresh</header>
           <div className="App-container">
-              <ul>
-              {list.map((item: string, index: number) => <li key={index}>{item}</li>)}
-              </ul>
+            <ul>
+              {list.map((item: string, index: number) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
           </div>
         </>
       </PullToRefresh>

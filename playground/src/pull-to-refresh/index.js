@@ -84,10 +84,10 @@ var RefreshingContent = function () {
 
 var PullingContent = function () {
     return (React.createElement("div", null,
-        React.createElement("p", null, "\u21A7\u00A0\u00A0Pull To Refresh\u00A0\u00A0\u21A7")));
+        React.createElement("p", null, "\u21A7\u00A0\u00A0pull to refresh\u00A0\u00A0\u21A7")));
 };
 
-var css$1 = ".ptr,\n.ptr__children {\n  height: 100%;\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  position: relative;\n  z-index: 1; }\n\n.ptr__children,\n.ptr__pull-down {\n  transition: transform 0.2s cubic-bezier(0, 0, 0.31, 1); }\n\n.ptr__pull-down {\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  right: 0;\n  top: 0;\n  visibility: 'hidden';\n  text-align: center; }\n  .ptr__pull-down > div {\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--loading {\n    display: none; }\n  .ptr__pull-down > .ptr__pull-down--pull-more {\n    display: none; }\n\n.ptr--dragging.ptr--treshold-breached .ptr__pull-down--pull-more {\n  display: none; }\n\n.ptr--dragging .ptr__pull-down--pull-more {\n  display: block; }\n\n.ptr--treshold-breached .ptr__pull-down {\n  opacity: 1 !important; }\n\n.ptr--treshold-breached .ptr__pull-down--loading {\n  display: block; }\n";
+var css$1 = ".ptr,\n.ptr__children {\n  height: 100%;\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  position: relative;\n  z-index: 1; }\n\n.ptr__children,\n.ptr__pull-down {\n  transition: transform 0.2s cubic-bezier(0, 0, 0.31, 1); }\n\n.ptr__pull-down {\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  right: 0;\n  top: 0;\n  visibility: 'hidden';\n  text-align: center; }\n  .ptr__pull-down > div {\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--loading {\n    display: none;\n    text-align: center;\n    margin: 0 auto; }\n  .ptr__pull-down > .ptr__pull-down--pull-more {\n    display: none;\n    text-align: center;\n    margin: 0 auto; }\n\n.ptr--dragging.ptr--treshold-breached .ptr__pull-down--pull-more {\n  display: none; }\n\n.ptr--dragging .ptr__pull-down--pull-more {\n  display: block; }\n\n.ptr--treshold-breached .ptr__pull-down {\n  opacity: 1 !important; }\n\n.ptr--treshold-breached .ptr__pull-down--loading {\n  display: block; }\n";
 styleInject(css$1);
 
 var PullToRefresh = function (_a) {
