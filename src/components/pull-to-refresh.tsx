@@ -126,6 +126,9 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       pullToRefreshThresholdBreached = true;
       containerRef.current!.classList.remove('ptr--dragging');
       containerRef.current!.classList.add('ptr--treshold-breached');
+    } else {
+      pullToRefreshThresholdBreached = false;
+      containerRef.current!.classList.remove('ptr--treshold-breached');
     }
 
     // maxPullDownDistance breached, stop the animation

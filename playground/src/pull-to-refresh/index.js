@@ -184,6 +184,10 @@ var PullToRefresh = function (_a) {
             containerRef.current.classList.remove('ptr--dragging');
             containerRef.current.classList.add('ptr--treshold-breached');
         }
+        else {
+            pullToRefreshThresholdBreached = false;
+            containerRef.current.classList.remove('ptr--treshold-breached');
+        }
         // maxPullDownDistance breached, stop the animation
         if (currentY - startY > maxPullDownDistance) {
             return;
