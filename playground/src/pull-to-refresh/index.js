@@ -162,7 +162,6 @@ var PullToRefresh = function (_a) {
         isDragging = true;
     };
     var onTouchMove = function (e) {
-        e.preventDefault();
         if (!isDragging) {
             return;
         }

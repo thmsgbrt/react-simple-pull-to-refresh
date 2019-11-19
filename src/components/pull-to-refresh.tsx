@@ -101,8 +101,6 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   };
 
   const onTouchMove = (e: MouseEvent | TouchEvent): void => {
-    e.preventDefault();
-
     if (!isDragging) {
       return;
     }
