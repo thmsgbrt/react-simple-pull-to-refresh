@@ -121,7 +121,7 @@ var PullToRefresh = function (_a) {
             childrenRef.current.removeEventListener('mouseup', onEnd);
             document.body.removeEventListener('mouseleave', onEnd);
         };
-    }, [isPullable]);
+    }, [isPullable, onRefresh]);
     useEffect(function () {
         initContainer();
     }, [children]);
