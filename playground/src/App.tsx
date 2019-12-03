@@ -21,7 +21,9 @@ const App: React.FC = () => {
           <div className="App-container">
             <ul>
               {list.map((item: string, index: number) => (
-                <li key={index}>{item}</li>
+                <li key={index}>
+                  {index} - {item}
+                </li>
               ))}
             </ul>
           </div>
