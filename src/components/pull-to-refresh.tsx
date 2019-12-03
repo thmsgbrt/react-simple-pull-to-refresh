@@ -56,7 +56,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       childrenRef.current.removeEventListener('mouseup', onEnd);
       document.body.removeEventListener('mouseleave', onEnd);
     };
-  }, [isPullable]);
+  }, [isPullable, onRefresh]);
 
   useEffect(() => {
     initContainer();
