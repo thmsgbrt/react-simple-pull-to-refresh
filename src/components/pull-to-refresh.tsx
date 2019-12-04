@@ -15,6 +15,9 @@ interface PullToRefreshProps {
   isPullable?: boolean;
   children: JSX.Element;
   className?: string;
+  onFetchMore?: Function;
+  canFetchMore?: boolean;
+  fetchMoreThreshold?: number;
 }
 
 const PullToRefresh: React.FC<PullToRefreshProps> = ({
@@ -23,15 +26,20 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   pullDownThreshold = 67,
   maxPullDownDistance = 95, // max distance to scroll to trigger refresh
   onRefresh,
+  onFetchMore = null,
   backgroundColor,
   isPullable = true,
+  canFetchMore = false,
+  fetchMoreThreshold = 100,
   children,
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
   const pullDownRef = useRef<HTMLDivElement>(null);
+  const fetchMoreRef = useRef<HTMLDivElement>(null);
   let pullToRefreshThresholdBreached: boolean = false;
+  let fetchMoreTresholdBreached: boolean = false;
   let isDragging: boolean = false;
   let startY: number = 0;
   let currentY: number = 0;
@@ -42,6 +50,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     childrenRef.current.addEventListener('mousedown', onTouchStart);
     childrenRef.current.addEventListener('touchmove', onTouchMove, { passive: false });
     childrenRef.current.addEventListener('mousemove', onTouchMove);
+    childrenRef.current.addEventListener('scroll', onScroll);
     childrenRef.current.addEventListener('touchend', onEnd);
     childrenRef.current.addEventListener('mouseup', onEnd);
     document.body.addEventListener('mouseleave', onEnd);
@@ -52,6 +61,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       childrenRef.current.removeEventListener('mousedown', onTouchStart);
       childrenRef.current.removeEventListener('touchmove', onTouchMove);
       childrenRef.current.removeEventListener('mousemove', onTouchMove);
+      childrenRef.current.addEventListener('scroll', onScroll);
       childrenRef.current.removeEventListener('touchend', onEnd);
       childrenRef.current.removeEventListener('mouseup', onEnd);
       document.body.removeEventListener('mouseleave', onEnd);
@@ -61,6 +71,30 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   useEffect(() => {
     initContainer();
   }, [children]);
+
+  /**
+   * Check onMount / canFetchMore becomes true
+   *  if fetchMoreThreshold is already breached
+   */
+  useEffect(() => {
+    if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
+      fetchMoreTresholdBreached = true;
+      containerRef.current!.classList.add('ptr--fetch-more-breached');
+      onFetchMore();
+    } else {
+      containerRef.current!.classList.remove('ptr--fetch-more-breached');
+    }
+  }, [canFetchMore]);
+
+  /**
+   * Returns distance to bottom of the container
+   */
+  const getScrollToBottomValue = (): number => {
+    if (!childrenRef || !childrenRef.current) return -1;
+    const scrollTop = childrenRef.current.scrollTop; // is the pixels hidden in top due to the scroll. With no scroll its value is 0.
+    const scrollHeight = childrenRef.current.scrollHeight; // is the pixels of the whole container
+    return scrollHeight - scrollTop - window.innerHeight;
+  };
 
   const initContainer = (): void => {
     requestAnimationFrame(() => {
@@ -75,6 +109,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       }
       if (containerRef.current) {
         containerRef.current.classList.remove('ptr--treshold-breached');
+        containerRef.current.classList.remove('ptr--fetch-more-breached');
         containerRef.current.classList.remove('ptr--dragging');
       }
     });
@@ -139,6 +174,15 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     pullDownRef.current!.style.visibility = 'visible';
   };
 
+  const onScroll = (e: Event): void => {
+    if (getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
+      // containerRef.current!.classList.add('ptr--fetch-more-breached');
+      onFetchMore();
+    } else {
+      // containerRef.current!.classList.remove('ptr--fetch-more-breached');
+    }
+  };
+
   const onEnd = (): void => {
     isDragging = false;
     startY = 0;
@@ -165,6 +209,9 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       </div>
       <div className="ptr__children" ref={childrenRef}>
         {children}
+      </div>
+      <div className="ptr__fetch-more" ref={fetchMoreRef}>
+        <div className="ptr__fetch-more--loading">{refreshingContent}</div>
       </div>
     </div>
   );
