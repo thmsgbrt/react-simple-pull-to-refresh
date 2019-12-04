@@ -9,11 +9,20 @@
 }
 
 .ptr {
-  &.ptr--fetch-more-breached {
-    height: auto;
+  &.ptr--fetch-more-treshold-breached {
+    .ptr__fetch-more {
+      display: block;
+    }
   }
 }
 
+.ptr__fetch-more {
+  display: none;
+}
+
+/**
+  * Pull down transition 
+  */
 .ptr__children,
 .ptr__pull-down {
   transition: transform 0.2s cubic-bezier(0, 0, 0.31, 1);
@@ -26,38 +35,44 @@
   right: 0;
   top: 0;
   visibility: hidden;
-  text-align: center;
   > div {
-    margin: 0 auto;
-  }
-  > .ptr__pull-down--loading {
     display: none;
-    text-align: center;
-    margin: 0 auto;
-  }
-  > .ptr__pull-down--pull-more {
-    display: none;
-    text-align: center;
-    margin: 0 auto;
   }
 }
 
 .ptr--dragging {
-  &.ptr--treshold-breached {
+  /**
+    * Hide PullMore content is treshold breached
+    */
+  &.ptr--pull-down-treshold-breached {
     .ptr__pull-down--pull-more {
       display: none;
     }
   }
+  /**
+    * Otherwize, display content
+    */
   .ptr__pull-down--pull-more {
     display: block;
   }
 }
 
-.ptr--treshold-breached {
+.ptr--pull-down-treshold-breached {
+  /**
+    * Force opacity to 1 is pull down trashold breached
+    */
   .ptr__pull-down {
     opacity: 1 !important;
   }
+  /**
+    * And display loader
+    */
   .ptr__pull-down--loading {
     display: block;
   }
+}
+
+.ptr__loader {
+  margin: 0 auto;
+  text-align: center;
 }
