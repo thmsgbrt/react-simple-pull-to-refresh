@@ -6,32 +6,32 @@ import { DIRECTION } from '../types';
 import '../styles/main.scss';
 
 interface PullToRefreshProps {
+  isPullable?: boolean;
+  canFetchMore?: boolean;
+  onRefresh: Function;
+  onFetchMore?: Function;
   refreshingContent?: JSX.Element | string;
   pullingContent?: JSX.Element | string;
-  pullDownThreshold?: number;
-  maxPullDownDistance?: number;
-  onRefresh: Function;
-  backgroundColor?: string;
-  isPullable?: boolean;
   children: JSX.Element;
-  className?: string;
-  onFetchMore?: Function;
-  canFetchMore?: boolean;
+  pullDownThreshold?: number;
   fetchMoreThreshold?: number;
+  maxPullDownDistance?: number;
+  backgroundColor?: string;
+  className?: string;
 }
 
 const PullToRefresh: React.FC<PullToRefreshProps> = ({
-  refreshingContent = <RefreshingContent />,
-  pullingContent = <PullingContent />,
-  pullDownThreshold = 67,
-  maxPullDownDistance = 95, // max distance to scroll to trigger refresh
-  onRefresh,
-  onFetchMore = null,
-  backgroundColor,
   isPullable = true,
   canFetchMore = false,
-  fetchMoreThreshold = 100,
+  onRefresh,
+  onFetchMore,
+  refreshingContent = <RefreshingContent />,
+  pullingContent = <PullingContent />,
   children,
+  pullDownThreshold = 67,
+  fetchMoreThreshold = 100,
+  maxPullDownDistance = 95, // max distance to scroll to trigger refresh
+  backgroundColor,
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
