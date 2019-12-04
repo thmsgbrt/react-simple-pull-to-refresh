@@ -60,19 +60,19 @@ return (
 
 ## Props Matrix
 
-|        Name         |         Type          | Required |        Default        | Description                                                                 |
-| :-----------------: | :-------------------: | :------: | :-------------------: | --------------------------------------------------------------------------- |
-|      onRefresh      |       Function        |   true   |                       | Function called when fefresh has been trigerred                             |
-|     isPullable      |        boolean        |  false   |         true          | Enable or disable pulling behavior                                          |
-|  refreshingContent  | JSX.Element or string |  false   | <RefreshingContent /> | Content displayed when refresh has been trigerred                           |
-|   pullingContent    | JSX.Element or string |  false   |  <PullingContent />   | Content displayed when pulling                                              |
-|  pullDownThreshold  |        number         |  false   |          67           | Distance to pull in pixel in order to trigger a refresh event               |
-| maxPullDownDistance |        number         |  false   |          95           | Maximum distance applied to Children when dragging                          |
-|   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                     |
-|     onFetchMore     |       Function        |  false   |                       | Enable or disable ability of fetching more                                  |
-|    canFetchMore     |        boolean        |  false   |         false         | Enable or disable ability of fetching more                                  |
-| fetchMoreThreshold  |        number         |  false   |          100          | Distance from bottom in pixel of the container to trigger a FetchMore event |
-|      className      |        string         |  false   |                       |                                                                             |
+|        Name         |         Type          | Required |        Default        | Description                                                                  |
+| :-----------------: | :-------------------: | :------: | :-------------------: | ---------------------------------------------------------------------------- |
+|     isPullable      |        boolean        |  false   |         true          | Enable or disable pulling feature                                            |
+|      onRefresh      |       Function        |   true   |                       | Function called when Refresh Event has been trigerred                        |
+|  pullDownThreshold  |        number         |  false   |          67           | Distance in pixel to pull to trigger a Refresh Event                         |
+| maxPullDownDistance |        number         |  false   |          95           | Maximum transitionY applied to Children when dragging                        |
+|  refreshingContent  | JSX.Element or string |  false   | <RefreshingContent /> | Content displayed when Pulling or Fetch more has been trigerred              |
+|   pullingContent    | JSX.Element or string |  false   |  <PullingContent />   | Content displayed when Pulling                                               |
+|    canFetchMore     |        boolean        |  false   |         false         | Enable or disable fetching more feature                                      |
+|     onFetchMore     |       Function        |  false   |                       | Function called when Fetch more Event has been trigerred                     |
+| fetchMoreThreshold  |        number         |  false   |          100          | Distance in pixel from bottom of the container to trigger a Fetch more Event |
+|   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                      |
+|      className      |        string         |  false   |                       |                                                                              |
 
 ## Contributing
 
