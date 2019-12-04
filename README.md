@@ -20,11 +20,33 @@ Works for Mobile and Desktop.
 
 ```jsx
 import PullToRefresh from 'react-simple-pull-to-refresh';
+```
 
+Pull To Refresh only
+
+```jsx
 // ...
 
 return (
   <PullToRefresh onRefresh={handleRefresh}>
+    <ul>
+      {list.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  </PullToRefresh>
+);
+
+// ...
+```
+
+Pull To Refresh and Fetch More enabled
+
+```jsx
+// ...
+
+return (
+  <PullToRefresh onRefresh={handleRefresh} canFetchMore={true} onFetchMore={handleFetchMore}>
     <ul>
       {list.map((item, index) => (
         <li key={index}>{item}</li>
