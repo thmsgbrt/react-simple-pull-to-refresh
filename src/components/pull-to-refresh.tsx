@@ -6,32 +6,40 @@ import { DIRECTION } from '../types';
 import '../styles/main.scss';
 
 interface PullToRefreshProps {
+  isPullable?: boolean;
+  canFetchMore?: boolean;
+  onRefresh: Function;
+  onFetchMore?: Function;
   refreshingContent?: JSX.Element | string;
   pullingContent?: JSX.Element | string;
-  pullDownThreshold?: number;
-  maxPullDownDistance?: number;
-  onRefresh: Function;
-  backgroundColor?: string;
-  isPullable?: boolean;
   children: JSX.Element;
+  pullDownThreshold?: number;
+  fetchMoreThreshold?: number;
+  maxPullDownDistance?: number;
+  backgroundColor?: string;
   className?: string;
 }
 
 const PullToRefresh: React.FC<PullToRefreshProps> = ({
+  isPullable = true,
+  canFetchMore = false,
+  onRefresh,
+  onFetchMore,
   refreshingContent = <RefreshingContent />,
   pullingContent = <PullingContent />,
-  pullDownThreshold = 67,
-  maxPullDownDistance = 95, // max distance to scroll to trigger refresh
-  onRefresh,
-  backgroundColor,
-  isPullable = true,
   children,
+  pullDownThreshold = 67,
+  fetchMoreThreshold = 100,
+  maxPullDownDistance = 95, // max distance to scroll to trigger refresh
+  backgroundColor,
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
   const pullDownRef = useRef<HTMLDivElement>(null);
+  const fetchMoreRef = useRef<HTMLDivElement>(null);
   let pullToRefreshThresholdBreached: boolean = false;
+  let fetchMoreTresholdBreached: boolean = false; // if true, fetchMore loader is displayed
   let isDragging: boolean = false;
   let startY: number = 0;
   let currentY: number = 0;
@@ -42,6 +50,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     childrenRef.current.addEventListener('mousedown', onTouchStart);
     childrenRef.current.addEventListener('touchmove', onTouchMove, { passive: false });
     childrenRef.current.addEventListener('mousemove', onTouchMove);
+    childrenRef.current.addEventListener('scroll', onScroll);
     childrenRef.current.addEventListener('touchend', onEnd);
     childrenRef.current.addEventListener('mouseup', onEnd);
     document.body.addEventListener('mouseleave', onEnd);
@@ -52,29 +61,70 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       childrenRef.current.removeEventListener('mousedown', onTouchStart);
       childrenRef.current.removeEventListener('touchmove', onTouchMove);
       childrenRef.current.removeEventListener('mousemove', onTouchMove);
+      childrenRef.current.removeEventListener('scroll', onScroll);
       childrenRef.current.removeEventListener('touchend', onEnd);
       childrenRef.current.removeEventListener('mouseup', onEnd);
       document.body.removeEventListener('mouseleave', onEnd);
     };
-  }, [isPullable, onRefresh, pullDownThreshold, maxPullDownDistance]);
+  }, [
+    children,
+    isPullable,
+    onRefresh,
+    pullDownThreshold,
+    maxPullDownDistance,
+    canFetchMore,
+    fetchMoreThreshold,
+  ]);
 
+  /**
+   * Set PTR to initial state when children prop is updated
+   */
   useEffect(() => {
     initContainer();
   }, [children]);
 
+  /**
+   * Check onMount / canFetchMore becomes true
+   *  if fetchMoreThreshold is already breached
+   */
+  useEffect(() => {
+    if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
+      if (containerRef && containerRef.current) {
+        containerRef.current.classList.add('ptr--fetch-more-treshold-breached');
+      }
+      fetchMoreTresholdBreached = true;
+      onFetchMore();
+    } else {
+      fetchMoreTresholdBreached = false;
+      containerRef.current!.classList.remove('ptr--fetch-more-treshold-breached');
+    }
+  }, [canFetchMore, children]);
+
+  /**
+   * Returns distance to bottom of the container
+   */
+  const getScrollToBottomValue = (): number => {
+    if (!childrenRef || !childrenRef.current) return -1;
+    const scrollTop = childrenRef.current.scrollTop; // is the pixels hidden in top due to the scroll. With no scroll its value is 0.
+    const scrollHeight = childrenRef.current.scrollHeight; // is the pixels of the whole container
+    return scrollHeight - scrollTop - window.innerHeight;
+  };
+
   const initContainer = (): void => {
     requestAnimationFrame(() => {
+      /**
+       * Reset Styles
+       */
       if (childrenRef.current) {
         childrenRef.current.style.overflowX = 'hidden';
         childrenRef.current.style.overflowY = 'auto';
-        // childrenRef.current.style.overflow = 'auto';
         childrenRef.current.style.transform = `translate(0px, 0px)`;
       }
       if (pullDownRef.current) {
         pullDownRef.current.style.opacity = '0';
       }
       if (containerRef.current) {
-        containerRef.current.classList.remove('ptr--treshold-breached');
+        containerRef.current.classList.remove('ptr--pull-down-treshold-breached');
         containerRef.current.classList.remove('ptr--dragging');
       }
     });
@@ -123,10 +173,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       isDragging = true;
       pullToRefreshThresholdBreached = true;
       containerRef.current!.classList.remove('ptr--dragging');
-      containerRef.current!.classList.add('ptr--treshold-breached');
+      containerRef.current!.classList.add('ptr--pull-down-treshold-breached');
     } else {
       pullToRefreshThresholdBreached = false;
-      containerRef.current!.classList.remove('ptr--treshold-breached');
+      containerRef.current!.classList.remove('ptr--pull-down-treshold-breached');
     }
 
     // maxPullDownDistance breached, stop the animation
@@ -137,6 +187,23 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     childrenRef.current!.style.overflow = 'visible';
     childrenRef.current!.style.transform = `translate(0px, ${currentY - startY}px)`;
     pullDownRef.current!.style.visibility = 'visible';
+  };
+
+  const onScroll = (e: Event): void => {
+    /**
+     * Check if component has already called onFetchMore
+     */
+    if (fetchMoreTresholdBreached) return;
+    /**
+     * Check if user breached fetchMoreThreshold
+     */
+    if (getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
+      fetchMoreTresholdBreached = true;
+      containerRef.current!.classList.add('ptr--fetch-more-treshold-breached');
+      onFetchMore();
+    } else {
+      containerRef.current!.classList.remove('ptr--fetch-more-treshold-breached');
+    }
   };
 
   const onEnd = (): void => {
@@ -160,11 +227,14 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   return (
     <div className={`ptr ${className}`} style={{ backgroundColor }} ref={containerRef}>
       <div className="ptr__pull-down" ref={pullDownRef}>
-        <div className="ptr__pull-down--loading">{refreshingContent}</div>
+        <div className="ptr__loader ptr__pull-down--loading">{refreshingContent}</div>
         <div className="ptr__pull-down--pull-more">{pullingContent}</div>
       </div>
       <div className="ptr__children" ref={childrenRef}>
         {children}
+        <div className="ptr__fetch-more" ref={fetchMoreRef}>
+          <div className="ptr__loader ptr__fetch-more--loading">{refreshingContent}</div>
+        </div>
       </div>
     </div>
   );

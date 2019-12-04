@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <PullToRefresh onRefresh={getNewData}>
+      <PullToRefresh onRefresh={getNewData} canFetchMore={true} onFetchMore={getNewData}>
         <>
           <header className="App-header">Pull To Refresh</header>
           <div className="App-container">
