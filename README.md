@@ -55,3 +55,7 @@ return (
 ## Contributing
 
 `npm run dev`
+
+## Changelog
+
+1.1.0: Added a Fetch-More feature
