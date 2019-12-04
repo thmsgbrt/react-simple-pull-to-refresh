@@ -80,4 +80,4 @@ return (
 
 ## Changelog
 
-1.1.0: Added a Fetch-More feature
+1.1.0: Add a Fetch More feature
