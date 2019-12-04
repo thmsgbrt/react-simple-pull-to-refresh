@@ -37,16 +37,19 @@ return (
 
 ## Props Matrix
 
-|        Name         |         Type          | Required | Description                                                   |
-| :-----------------: | :-------------------: | :------: | ------------------------------------------------------------- |
-|      onRefresh      |       Function        |   true   | Function called when fefresh has been trigerred               |
-|     isPullable      |        boolean        |  false   | Enable or disable pulling behavior                            |
-|  refreshingContent  | JSX.Element or string |  false   | Content displayed when refresh has been trigerred             |
-|   pullingContent    | JSX.Element or string |  false   | Content displayed when pulling                                |
-|  pullDownThreshold  |        number         |  false   | Distance to pull in pixel in order to trigger a refresh event |
-| maxPullDownDistance |        number         |  false   | Maximum distance applied to Children when dragging            |
-|   backgroundColor   |        string         |  false   | Apply a backgroundColor                                       |
-|      className      |        string         |  false   |                                                               |
+|        Name         |         Type          | Required |        Default        | Description                                                                 |
+| :-----------------: | :-------------------: | :------: | :-------------------: | --------------------------------------------------------------------------- |
+|      onRefresh      |       Function        |   true   |                       | Function called when fefresh has been trigerred                             |
+|     isPullable      |        boolean        |  false   |         true          | Enable or disable pulling behavior                                          |
+|  refreshingContent  | JSX.Element or string |  false   | <RefreshingContent /> | Content displayed when refresh has been trigerred                           |
+|   pullingContent    | JSX.Element or string |  false   |  <PullingContent />   | Content displayed when pulling                                              |
+|  pullDownThreshold  |        number         |  false   |          67           | Distance to pull in pixel in order to trigger a refresh event               |
+| maxPullDownDistance |        number         |  false   |          95           | Maximum distance applied to Children when dragging                          |
+|   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                     |
+|     onFetchMore     |       Function        |  false   |                       | Enable or disable ability of fetching more                                  |
+|    canFetchMore     |        boolean        |  false   |         false         | Enable or disable ability of fetching more                                  |
+| fetchMoreThreshold  |        number         |  false   |          100          | Distance from bottom in pixel of the container to trigger a FetchMore event |
+|      className      |        string         |  false   |                       |                                                                             |
 
 ## Contributing
 
