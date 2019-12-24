@@ -197,7 +197,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     /**
      * Check if user breached fetchMoreThreshold
      */
-    if (getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
+    if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
       fetchMoreTresholdBreached = true;
       containerRef.current!.classList.add('ptr--fetch-more-treshold-breached');
       onFetchMore();
