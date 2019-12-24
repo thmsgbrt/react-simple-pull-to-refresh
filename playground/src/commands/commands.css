@@ -1,0 +1,74 @@
+.commands {
+  display: flex;
+  overflow-x: auto;
+  padding: 15px 20px;
+}
+
+.command__group {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  font-size: 1rem;
+}
+
+input[type='number'] {
+  background: white;
+  border-radius: 3px;
+  line-height: 15px;
+  background-position: 0 15px;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+  color: salmon;
+  font-weight: bold;
+  padding: 5px;
+  margin-right: 1rem;
+  width: 35px;
+}
+
+input[type='checkbox'] {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  margin-right: 1rem;
+}
+
+input[type='checkbox']:after {
+  content: '\00D7';
+  display: block;
+  background: white;
+  background-image: url('https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-21-32.png');
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  color: transparent;
+  transition: 0.25s all ease-in-out;
+  border-radius: 3px;
+  line-height: 15px;
+  background-position: 0 15px;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+}
+input[type='checkbox']:checked:after {
+  background-color: salmon;
+  background-position: 0 0;
+}
+input[type='checkbox']:hover:after {
+  border-color: salmon;
+}
+
+button {
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 10px;
+  color: white;
+}

@@ -1,7 +1,3 @@
-.App {
-  height: 100vh;
-}
-
 .App-header {
   text-align: center;
   background-color: #282c34;
@@ -12,4 +8,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-ptr {
+  height: 100%;
+}
+
+.App-commands {
+  background: linear-gradient(35deg, #64b6ac, #3c6b7c 100%);
 }
