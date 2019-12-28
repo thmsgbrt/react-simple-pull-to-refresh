@@ -109,7 +109,7 @@ var PullToRefresh = function (_a) {
         childrenRef.current.addEventListener('mousedown', onTouchStart);
         childrenRef.current.addEventListener('touchmove', onTouchMove, { passive: false });
         childrenRef.current.addEventListener('mousemove', onTouchMove);
-        childrenRef.current.addEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll);
         childrenRef.current.addEventListener('touchend', onEnd);
         childrenRef.current.addEventListener('mouseup', onEnd);
         document.body.addEventListener('mouseleave', onEnd);
@@ -120,7 +120,7 @@ var PullToRefresh = function (_a) {
             childrenRef.current.removeEventListener('mousedown', onTouchStart);
             childrenRef.current.removeEventListener('touchmove', onTouchMove);
             childrenRef.current.removeEventListener('mousemove', onTouchMove);
-            childrenRef.current.removeEventListener('scroll', onScroll);
+            window.removeEventListener('scroll', onScroll);
             childrenRef.current.removeEventListener('touchend', onEnd);
             childrenRef.current.removeEventListener('mouseup', onEnd);
             document.body.removeEventListener('mouseleave', onEnd);
@@ -163,7 +163,7 @@ var PullToRefresh = function (_a) {
     var getScrollToBottomValue = function () {
         if (!childrenRef || !childrenRef.current)
             return -1;
-        var scrollTop = childrenRef.current.scrollTop; // is the pixels hidden in top due to the scroll. With no scroll its value is 0.
+        var scrollTop = window.scrollY; // is the pixels hidden in top due to the scroll. With no scroll its value is 0.
         var scrollHeight = childrenRef.current.scrollHeight; // is the pixels of the whole container
         return scrollHeight - scrollTop - window.innerHeight;
     };
