@@ -80,5 +80,6 @@ return (
 
 ## Changelog
 
+1.1.2: Bind Scroll event to Window
 1.1.0: Check for "canFetchMore" value for each scroll events.
 1.1.0: Add a Fetch More feature
