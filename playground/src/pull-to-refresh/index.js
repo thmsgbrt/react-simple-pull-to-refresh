@@ -135,26 +135,26 @@ var PullToRefresh = function (_a) {
         fetchMoreThreshold,
     ]);
     /**
-     * Set PTR to initial state when children prop is updated
-     */
-    useEffect(function () {
-        initContainer();
-    }, [children]);
-    /**
      * Check onMount / canFetchMore becomes true
      *  if fetchMoreThreshold is already breached
      */
     useEffect(function () {
+        var _a;
+        /**
+         * Check if it is already in fetching more state
+         */
+        if (!((_a = containerRef) === null || _a === void 0 ? void 0 : _a.current))
+            return;
+        var isAlreadyFetchingMore = containerRef.current.classList.contains('ptr--fetch-more-treshold-breached');
+        if (isAlreadyFetchingMore)
+            return;
+        /**
+         * Proceed
+         */
         if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
-            if (containerRef && containerRef.current) {
-                containerRef.current.classList.add('ptr--fetch-more-treshold-breached');
-            }
+            containerRef.current.classList.add('ptr--fetch-more-treshold-breached');
             fetchMoreTresholdBreached = true;
-            onFetchMore();
-        }
-        else {
-            fetchMoreTresholdBreached = false;
-            containerRef.current.classList.remove('ptr--fetch-more-treshold-breached');
+            onFetchMore().then(initContainer).catch(initContainer);
         }
     }, [canFetchMore, children]);
     /**
@@ -183,7 +183,12 @@ var PullToRefresh = function (_a) {
             if (containerRef.current) {
                 containerRef.current.classList.remove('ptr--pull-down-treshold-breached');
                 containerRef.current.classList.remove('ptr--dragging');
+                containerRef.current.classList.remove('ptr--fetch-more-treshold-breached');
             }
+            if (pullToRefreshThresholdBreached)
+                pullToRefreshThresholdBreached = false;
+            if (fetchMoreTresholdBreached)
+                fetchMoreTresholdBreached = false;
         });
     };
     var onTouchStart = function (e) {
@@ -227,10 +232,6 @@ var PullToRefresh = function (_a) {
             containerRef.current.classList.remove('ptr--dragging');
             containerRef.current.classList.add('ptr--pull-down-treshold-breached');
         }
-        else {
-            pullToRefreshThresholdBreached = false;
-            containerRef.current.classList.remove('ptr--pull-down-treshold-breached');
-        }
         // maxPullDownDistance breached, stop the animation
         if (currentY - startY > maxPullDownDistance) {
             return;
@@ -252,10 +253,7 @@ var PullToRefresh = function (_a) {
         if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
             fetchMoreTresholdBreached = true;
             containerRef.current.classList.add('ptr--fetch-more-treshold-breached');
-            onFetchMore();
-        }
-        else {
-            containerRef.current.classList.remove('ptr--fetch-more-treshold-breached');
+            onFetchMore().then(initContainer).catch(initContainer);
         }
     };
     var onEnd = function () {
@@ -270,8 +268,7 @@ var PullToRefresh = function (_a) {
         }
         childrenRef.current.style.overflow = 'visible';
         childrenRef.current.style.transform = "translate(0px, " + pullDownThreshold + "px)";
-        pullToRefreshThresholdBreached = false;
-        onRefresh();
+        onRefresh().then(initContainer).catch(initContainer);
     };
     return (React.createElement("div", { className: "ptr " + className, style: { backgroundColor: backgroundColor }, ref: containerRef },
         React.createElement("div", { className: "ptr__pull-down", ref: pullDownRef },

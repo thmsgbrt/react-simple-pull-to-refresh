@@ -3,8 +3,8 @@ import '../styles/main.scss';
 interface PullToRefreshProps {
     isPullable?: boolean;
     canFetchMore?: boolean;
-    onRefresh: Function;
-    onFetchMore?: Function;
+    onRefresh: () => Promise<any>;
+    onFetchMore?: () => Promise<any>;
     refreshingContent?: JSX.Element | string;
     pullingContent?: JSX.Element | string;
     children: JSX.Element;

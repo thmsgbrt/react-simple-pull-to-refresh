@@ -1,6 +1,6 @@
 {
   "name": "react-simple-pull-to-refresh",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A Simple Pull To Refresh Component for React Application",
   "main": "build/index.cjs.js",
   "module": "build/index.esm.js",
@@ -37,7 +37,7 @@
     "rollup-plugin-delete": "^1.1.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-typescript2": "^0.24.3",
-    "typescript": "^3.6.4"
+    "typescript": "3.7.5"
   },
   "peerDependencies": {
     "react": "^16.10.2",

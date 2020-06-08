@@ -13,7 +13,7 @@ const DEFAULT_VALUES = {
 
 const App: React.FC = () => {
   // prettier-ignore
-  const FAKE_LIST = ['foo','bar','baz','foo','foo','bar','baz','foo','foo','bar','baz','foo','foo','bar','baz','foo'];
+  const FAKE_LIST = ['foo','bar','baz','foo','foo','bar','baz','foo','foo','bar','baz','foo','foo','bar','baz'];
   const [list, setList] = useState<string[]>(FAKE_LIST);
   const [isPullable, setIsPullable] = useState<boolean>(DEFAULT_VALUES.isPullable);
   const [canFetchMore, setCanFetchMore] = useState<boolean>(DEFAULT_VALUES.canFetchMore);
@@ -29,10 +29,12 @@ const App: React.FC = () => {
     setMaxPullDownDistance(DEFAULT_VALUES.maxPullDownDistance);
   };
 
-  const getNewData = (): void => {
-    setTimeout(() => {
-      setList([...list, ...FAKE_LIST]);
-    }, 1500);
+  const getNewData = (): Promise<void> => {
+    return new Promise(res => {
+      setTimeout(() => {
+        res(setList([...list, ...FAKE_LIST]));
+      }, 1500);
+    });
   };
 
   return (
@@ -71,7 +73,7 @@ const App: React.FC = () => {
               <ul>
                 {list.map((item: string, index: number) => (
                   <li key={index}>
-                    {index} - {item}
+                    {index + 1} - {item}
                   </li>
                 ))}
               </ul>

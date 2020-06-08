@@ -63,13 +63,13 @@ return (
 |        Name         |         Type          | Required |        Default        | Description                                                                  |
 | :-----------------: | :-------------------: | :------: | :-------------------: | ---------------------------------------------------------------------------- |
 |     isPullable      |        boolean        |  false   |         true          | Enable or disable pulling feature                                            |
-|      onRefresh      |       Function        |   true   |                       | Function called when Refresh Event has been trigerred                        |
+|      onRefresh      |  () => Promise<any>   |   true   |                       | Function called when Refresh Event has been trigerred                        |
 |  pullDownThreshold  |        number         |  false   |          67           | Distance in pixel to pull to trigger a Refresh Event                         |
 | maxPullDownDistance |        number         |  false   |          95           | Maximum transitionY applied to Children when dragging                        |
 |  refreshingContent  | JSX.Element or string |  false   | <RefreshingContent /> | Content displayed when Pulling or Fetch more has been trigerred              |
 |   pullingContent    | JSX.Element or string |  false   |  <PullingContent />   | Content displayed when Pulling                                               |
 |    canFetchMore     |        boolean        |  false   |         false         | Enable or disable fetching more feature                                      |
-|     onFetchMore     |       Function        |  false   |                       | Function called when Fetch more Event has been trigerred                     |
+|     onFetchMore     |  () => Promise<any>   |  false   |                       | Function called when Fetch more Event has been trigerred                     |
 | fetchMoreThreshold  |        number         |  false   |          100          | Distance in pixel from bottom of the container to trigger a Fetch more Event |
 |   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                      |
 |      className      |        string         |  false   |                       |                                                                              |
@@ -79,6 +79,8 @@ return (
 `npm run dev`
 
 ## Changelog
+
+1.2.0: onRefresh and onFetchMore now require to be of type Function, that return a Promise
 
 1.1.2: Bind Scroll event to Window
 1.1.0: Check for "canFetchMore" value for each scroll events.
