@@ -80,7 +80,9 @@ return (
 
 ## Changelog
 
-1.2.0: onRefresh and onFetchMore now require to be of type Function, that return a Promise
+1.2.1: Remove unnecessary z-index
+
+1.2.0: onRefresh and onFetchMore now require to be of type () => Promise<any>
 
 1.1.2: Bind Scroll event to Window
 
