@@ -211,13 +211,15 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
     // Container has not been dragged enough, put it back to it's initial state
     if (!pullToRefreshThresholdBreached) {
-      pullDownRef.current!.style.visibility = 'hidden';
+      if (pullDownRef.current) pullDownRef.current!.style.visibility = 'hidden';
       initContainer();
       return;
     }
 
-    childrenRef.current!.style.overflow = 'visible';
-    childrenRef.current!.style.transform = `translate(0px, ${pullDownThreshold}px)`;
+    if (childrenRef.current) {
+      childrenRef.current!.style.overflow = 'visible';
+      childrenRef.current!.style.transform = `translate(0px, ${pullDownThreshold}px)`;
+    }
     onRefresh().then(initContainer).catch(initContainer);
   };
 
