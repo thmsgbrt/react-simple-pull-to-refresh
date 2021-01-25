@@ -138,7 +138,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (e instanceof MouseEvent) {
       startY = e.pageY;
     }
-    if (e instanceof TouchEvent) {
+    if (window.TouchEvent && e instanceof TouchEvent) {
       startY = e.touches[0].pageY;
     }
     currentY = startY;
@@ -158,10 +158,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       return;
     }
 
-    if (e instanceof TouchEvent) {
+    if (window.TouchEvent && e instanceof TouchEvent) {
       currentY = e.touches[0].pageY;
     } else {
-      currentY = e.pageY;
+      currentY = (e as MouseEvent).pageY;
     }
 
     containerRef.current!.classList.add('ptr--dragging');
@@ -211,13 +211,15 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
     // Container has not been dragged enough, put it back to it's initial state
     if (!pullToRefreshThresholdBreached) {
-      pullDownRef.current!.style.visibility = 'hidden';
+      if (pullDownRef.current) pullDownRef.current.style.visibility = 'hidden';
       initContainer();
       return;
     }
 
-    childrenRef.current!.style.overflow = 'visible';
-    childrenRef.current!.style.transform = `translate(0px, ${pullDownThreshold}px)`;
+    if (childrenRef.current) {
+      childrenRef.current.style.overflow = 'visible';
+      childrenRef.current.style.transform = `translate(0px, ${pullDownThreshold}px)`;
+    }
     onRefresh().then(initContainer).catch(initContainer);
   };
 
