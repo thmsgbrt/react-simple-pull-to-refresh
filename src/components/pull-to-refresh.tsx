@@ -138,7 +138,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (e instanceof MouseEvent) {
       startY = e.pageY;
     }
-    if (e instanceof TouchEvent) {
+    if (window.TouchEvent && e instanceof TouchEvent) {
       startY = e.touches[0].pageY;
     }
     currentY = startY;
@@ -158,7 +158,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       return;
     }
 
-    if (e instanceof TouchEvent) {
+    if (window.TouchEvent && e instanceof TouchEvent) {
       currentY = e.touches[0].pageY;
     } else {
       currentY = e.pageY;
