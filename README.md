@@ -80,6 +80,8 @@ return (
 
 ## Changelog
 
+1.2.2: Remove non-null assertion operators from ref.current + TouchEvent check for Mozilla
+
 1.2.1: Remove unnecessary z-index
 
 1.2.0: onRefresh and onFetchMore now require to be of type () => Promise<any>

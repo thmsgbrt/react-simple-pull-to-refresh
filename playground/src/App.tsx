@@ -63,6 +63,7 @@ const App: React.FC = () => {
           fetchMoreThreshold={fetchMoreThreshold}
           pullDownThreshold={pullDownThreshold}
           maxPullDownDistance={maxPullDownDistance}
+          pullingContent=""
         >
           <>
             <header className="App-header">
