@@ -80,7 +80,9 @@ return (
 
 ## Changelog
 
-1.2.2: Remove non-null assertion operators from ref.current + TouchEvent check for Mozilla ❤️ Thanks [@HamAndRock](https://github.com/HamAndRock)
+1.2.3: Add React 17+ as valid peer dependencies - (From: [@Felixmosh](https://github.com/felixmosh))
+
+1.2.2: Remove non-null assertion operators from ref.current + TouchEvent check for Mozilla - (From: [@HamAndRock](https://github.com/HamAndRock))
 
 1.2.1: Remove unnecessary z-index
 
