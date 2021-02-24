@@ -8,6 +8,12 @@
 A Simple Pull-To-Refresh Component for React Application with 0 dependency.
 Works for Mobile and Desktop.
 
+## Contributing
+
+⚠️ I don't have much time to take care of the issues at the moment, and not using the package on any of my project.
+
+🙏 Any help and contribution is greatly appreciated.
+
 ## Demo
 
 [Click here 👍](https://thmsgbrt.github.io/react-simple-pull-to-refresh)
@@ -73,10 +79,7 @@ return (
 | fetchMoreThreshold  |        number         |  false   |          100          | Distance in pixel from bottom of the container to trigger a Fetch more Event |
 |   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                      |
 |      className      |        string         |  false   |                       |                                                                              |
-
-## Contributing
-
-`npm run dev`
+  
 
 ## Changelog
 
