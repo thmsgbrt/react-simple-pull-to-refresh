@@ -10,7 +10,7 @@ Works for Mobile and Desktop.
 
 ## Contributing
 
-⚠️ I don't have much time to take care of the issues at the moment, and not using the package on any of my project.
+⚠️ I don't have much time to take care of the issues at the moment.
 
 🙏 Any help and contribution is greatly appreciated.
 
