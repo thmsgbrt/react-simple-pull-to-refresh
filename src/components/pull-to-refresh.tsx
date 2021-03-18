@@ -117,7 +117,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       if (childrenRef.current) {
         childrenRef.current.style.overflowX = 'hidden';
         childrenRef.current.style.overflowY = 'auto';
-        childrenRef.current.style.transform = `translate(0px, 0px)`;
+        childrenRef.current.style.marginTop= 0;
       }
       if (pullDownRef.current) {
         pullDownRef.current.style.opacity = '0';
@@ -185,7 +185,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     }
     pullDownRef.current!.style.opacity = ((currentY - startY) / 65).toString();
     childrenRef.current!.style.overflow = 'visible';
-    childrenRef.current!.style.transform = `translate(0px, ${currentY - startY}px)`;
+    childrenRef.current!.style.marginTop = `${currentY - startY}px`;
     pullDownRef.current!.style.visibility = 'visible';
   };
 
@@ -218,7 +218,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
     if (childrenRef.current) {
       childrenRef.current.style.overflow = 'visible';
-      childrenRef.current.style.transform = `translate(0px, ${pullDownThreshold}px)`;
+      childrenRef.current.style.marginTop = `${pullDownThreshold}px`;
     }
     onRefresh().then(initContainer).catch(initContainer);
   };
