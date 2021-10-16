@@ -92,7 +92,8 @@ styleInject(css$1);
 
 var PullToRefresh = function (_a) {
     var _b = _a.isPullable, isPullable = _b === void 0 ? true : _b, _c = _a.canFetchMore, canFetchMore = _c === void 0 ? false : _c, onRefresh = _a.onRefresh, onFetchMore = _a.onFetchMore, _d = _a.refreshingContent, refreshingContent = _d === void 0 ? React.createElement(RefreshingContent, null) : _d, _e = _a.pullingContent, pullingContent = _e === void 0 ? React.createElement(PullingContent, null) : _e, children = _a.children, _f = _a.pullDownThreshold, pullDownThreshold = _f === void 0 ? 67 : _f, _g = _a.fetchMoreThreshold, fetchMoreThreshold = _g === void 0 ? 100 : _g, _h = _a.maxPullDownDistance, maxPullDownDistance = _h === void 0 ? 95 : _h, // max distance to scroll to trigger refresh
-    backgroundColor = _a.backgroundColor, _j = _a.className, className = _j === void 0 ? '' : _j;
+    _j = _a.resistance, // max distance to scroll to trigger refresh
+    resistance = _j === void 0 ? 1 : _j, backgroundColor = _a.backgroundColor, _k = _a.className, className = _k === void 0 ? '' : _k;
     var containerRef = useRef(null);
     var childrenRef = useRef(null);
     var pullDownRef = useRef(null);
@@ -225,20 +226,21 @@ var PullToRefresh = function (_a) {
             isDragging = false;
             return;
         }
+        var yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
         // Limit to trigger refresh has been breached
-        if (currentY - startY >= pullDownThreshold) {
+        if (yDistanceMoved >= pullDownThreshold) {
             isDragging = true;
             pullToRefreshThresholdBreached = true;
             containerRef.current.classList.remove('ptr--dragging');
             containerRef.current.classList.add('ptr--pull-down-treshold-breached');
         }
         // maxPullDownDistance breached, stop the animation
-        if (currentY - startY > maxPullDownDistance) {
+        if (yDistanceMoved >= maxPullDownDistance) {
             return;
         }
-        pullDownRef.current.style.opacity = ((currentY - startY) / 65).toString();
+        pullDownRef.current.style.opacity = ((yDistanceMoved) / 65).toString();
         childrenRef.current.style.overflow = 'visible';
-        childrenRef.current.style.transform = "translate(0px, " + (currentY - startY) + "px)";
+        childrenRef.current.style.transform = "translate(0px, " + yDistanceMoved + "px)";
         pullDownRef.current.style.visibility = 'visible';
     };
     var onScroll = function (e) {

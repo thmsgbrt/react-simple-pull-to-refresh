@@ -11,6 +11,7 @@ interface PullToRefreshProps {
     pullDownThreshold?: number;
     fetchMoreThreshold?: number;
     maxPullDownDistance?: number;
+    resistance?: number;
     backgroundColor?: string;
     className?: string;
 }
