@@ -171,6 +171,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       return;
     }
 
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+
     // Limit to trigger refresh has been breached
     if (currentY - startY >= pullDownThreshold) {
       isDragging = true;
