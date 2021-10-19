@@ -7,11 +7,13 @@ interface Props {
   fetchMoreThreshold: number;
   pullDownThreshold: number;
   maxPullDownDistance: number;
+  resistance: number;
   setCanFetchMore: Function;
   setIsPullable: Function;
   setFetchMoreThreshold: Function;
   setPullDownThreshold: Function;
   setMaxPullDownDistance: Function;
+  setResistance: Function;
   onReset: Function;
 }
 
@@ -26,6 +28,8 @@ const Commands = ({
   pullDownThreshold,
   setMaxPullDownDistance,
   maxPullDownDistance,
+  resistance,
+  setResistance,
   onReset,
 }: Props) => {
   return (
@@ -81,6 +85,17 @@ const Commands = ({
           />
           <label htmlFor="maxPullDownDistance">
             <code>maxPullDownDistance</code>
+          </label>
+        </div>
+        <div className="command__group">
+          <input
+            type="number"
+            id="resistance"
+            value={resistance}
+            onChange={e => setResistance(e.target.value)}
+          />
+          <label htmlFor="maxPullDownDistance">
+            <code>resistance</code>
           </label>
         </div>
       </div>

@@ -9,6 +9,7 @@ const DEFAULT_VALUES = {
   fetchMoreThreshold: 100,
   pullDownThreshold: 67,
   maxPullDownDistance: 95,
+  resistance: 1,
 };
 
 const App: React.FC = () => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
   const [fetchMoreThreshold, setFetchMoreThreshold] = useState<number>(DEFAULT_VALUES.fetchMoreThreshold);
   const [pullDownThreshold, setPullDownThreshold] = useState<number>(DEFAULT_VALUES.pullDownThreshold);
   const [maxPullDownDistance, setMaxPullDownDistance] = useState<number>(DEFAULT_VALUES.maxPullDownDistance);
+  const [resistance, setResistance] = useState<number>(DEFAULT_VALUES.resistance);
 
   const handleReset = (): void => {
     setIsPullable(DEFAULT_VALUES.isPullable);
@@ -27,6 +29,7 @@ const App: React.FC = () => {
     setFetchMoreThreshold(DEFAULT_VALUES.fetchMoreThreshold);
     setPullDownThreshold(DEFAULT_VALUES.pullDownThreshold);
     setMaxPullDownDistance(DEFAULT_VALUES.maxPullDownDistance);
+    setResistance(DEFAULT_VALUES.resistance);
   };
 
   const getNewData = (): Promise<void> => {
@@ -51,6 +54,8 @@ const App: React.FC = () => {
           setPullDownThreshold={(n: number) => setPullDownThreshold(n)}
           maxPullDownDistance={maxPullDownDistance}
           setMaxPullDownDistance={(n: number) => setMaxPullDownDistance(n)}
+          resistance={resistance}
+          setResistance={(n: number) => setResistance(n)}
           onReset={handleReset}
         />
       </div>
@@ -64,7 +69,7 @@ const App: React.FC = () => {
           pullDownThreshold={pullDownThreshold}
           maxPullDownDistance={maxPullDownDistance}
           pullingContent=""
-          resistance={3}
+          resistance={resistance}
         >
           <>
             <header className="App-header">
