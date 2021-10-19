@@ -81,8 +81,13 @@ return (
 |   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                      |
 |      className      |        string         |  false   |                       |                                                                              |
 
+  
 
 ## Changelog
+
+1.2.5: Fix event listenter leaks - (From: [@d-s-x](https://github.com/d-s-x))
+
+1.2.4: Fix overscroll on iOS Safari - (From: [@d-s-x](https://github.com/d-s-x))
 
 1.2.3: Add React 17+ as valid peer dependencies - (From: [@Felixmosh](https://github.com/felixmosh))
 

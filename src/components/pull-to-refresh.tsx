@@ -48,24 +48,24 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
   useEffect(() => {
     if (!isPullable || !childrenRef || !childrenRef.current) return;
-    childrenRef.current.addEventListener('touchstart', onTouchStart, { passive: true });
-    childrenRef.current.addEventListener('mousedown', onTouchStart);
-    childrenRef.current.addEventListener('touchmove', onTouchMove, { passive: false });
-    childrenRef.current.addEventListener('mousemove', onTouchMove);
+    const childrenEl = childrenRef.current;
+    childrenEl.addEventListener('touchstart', onTouchStart, { passive: true });
+    childrenEl.addEventListener('mousedown', onTouchStart);
+    childrenEl.addEventListener('touchmove', onTouchMove, { passive: false });
+    childrenEl.addEventListener('mousemove', onTouchMove);
     window.addEventListener('scroll', onScroll);
-    childrenRef.current.addEventListener('touchend', onEnd);
-    childrenRef.current.addEventListener('mouseup', onEnd);
+    childrenEl.addEventListener('touchend', onEnd);
+    childrenEl.addEventListener('mouseup', onEnd);
     document.body.addEventListener('mouseleave', onEnd);
 
     return () => {
-      if (!isPullable || !childrenRef || !childrenRef.current) return;
-      childrenRef.current.removeEventListener('touchstart', onTouchStart);
-      childrenRef.current.removeEventListener('mousedown', onTouchStart);
-      childrenRef.current.removeEventListener('touchmove', onTouchMove);
-      childrenRef.current.removeEventListener('mousemove', onTouchMove);
+      childrenEl.removeEventListener('touchstart', onTouchStart);
+      childrenEl.removeEventListener('mousedown', onTouchStart);
+      childrenEl.removeEventListener('touchmove', onTouchMove);
+      childrenEl.removeEventListener('mousemove', onTouchMove);
       window.removeEventListener('scroll', onScroll);
-      childrenRef.current.removeEventListener('touchend', onEnd);
-      childrenRef.current.removeEventListener('mouseup', onEnd);
+      childrenEl.removeEventListener('touchend', onEnd);
+      childrenEl.removeEventListener('mouseup', onEnd);
       document.body.removeEventListener('mouseleave', onEnd);
     };
   }, [
@@ -173,6 +173,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       return;
     }
 
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+      
     const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
