@@ -16,6 +16,7 @@ interface PullToRefreshProps {
   pullDownThreshold?: number;
   fetchMoreThreshold?: number;
   maxPullDownDistance?: number;
+  resistance?: number;
   backgroundColor?: string;
   className?: string;
 }
@@ -31,6 +32,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   pullDownThreshold = 67,
   fetchMoreThreshold = 100,
   maxPullDownDistance = 95, // max distance to scroll to trigger refresh
+  resistance = 1,
   backgroundColor,
   className = '',
 }) => {
@@ -174,9 +176,11 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (e.cancelable) {
       e.preventDefault();
     }
+      
+    const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
-    if (currentY - startY >= pullDownThreshold) {
+    if (yDistanceMoved >= pullDownThreshold) {
       isDragging = true;
       pullToRefreshThresholdBreached = true;
       containerRef.current!.classList.remove('ptr--dragging');
@@ -184,12 +188,12 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     }
 
     // maxPullDownDistance breached, stop the animation
-    if (currentY - startY > maxPullDownDistance) {
+    if (yDistanceMoved >= maxPullDownDistance) {
       return;
     }
-    pullDownRef.current!.style.opacity = ((currentY - startY) / 65).toString();
+    pullDownRef.current!.style.opacity = ((yDistanceMoved) / 65).toString();
     childrenRef.current!.style.overflow = 'visible';
-    childrenRef.current!.style.transform = `translate(0px, ${currentY - startY}px)`;
+    childrenRef.current!.style.transform = `translate(0px, ${yDistanceMoved}px)`;
     pullDownRef.current!.style.visibility = 'visible';
   };
 

@@ -72,6 +72,7 @@ return (
 |      onRefresh      |  () => Promise<any>   |   true   |                       | Function called when Refresh Event has been trigerred                        |
 |  pullDownThreshold  |        number         |  false   |          67           | Distance in pixel to pull to trigger a Refresh Event                         |
 | maxPullDownDistance |        number         |  false   |          95           | Maximum transitionY applied to Children when dragging                        |
+|     resistance      |        number         |  false   |           1           | Scale of difficulty to pull down                                             |
 |  refreshingContent  | JSX.Element or string |  false   | <RefreshingContent /> | Content displayed when Pulling or Fetch more has been trigerred              |
 |   pullingContent    | JSX.Element or string |  false   |  <PullingContent />   | Content displayed when Pulling                                               |
 |    canFetchMore     |        boolean        |  false   |         false         | Enable or disable fetching more feature                                      |
@@ -79,6 +80,8 @@ return (
 | fetchMoreThreshold  |        number         |  false   |          100          | Distance in pixel from bottom of the container to trigger a Fetch more Event |
 |   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                      |
 |      className      |        string         |  false   |                       |                                                                              |
+
+  
 
 ## Changelog
 
