@@ -81,9 +81,9 @@ return (
 |   backgroundColor   |        string         |  false   |                       | Apply a backgroundColor                                                      |
 |      className      |        string         |  false   |                       |                                                                              |
 
-  
-
 ## Changelog
+
+1.3.0: Add a _resistance_ prop, that allows to adjust the pull down difficulty - (From: [@joshuahiggins](https://github.com/joshuahiggins))
 
 1.2.5: Fix event listenter leaks - (From: [@d-s-x](https://github.com/d-s-x))
 
