@@ -117,8 +117,8 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
        * Reset Styles
        */
       if (childrenRef.current) {
-        childrenRef.current.style.overflowX = 'hidden';
-        childrenRef.current.style.overflowY = 'auto';
+        childrenRef.current.style.overflowX = 'initial';
+        childrenRef.current.style.overflowY = 'initial';
         childrenRef.current.style.transform = `translate(0px, 0px)`;
       }
       if (pullDownRef.current) {
