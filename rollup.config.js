@@ -17,7 +17,10 @@ export default [
     ],
     plugins: [
       del({ targets: ['build/*', 'playground/src/pull-to-refresh'] }),
-      typescript(),
+      typescript({
+        typescript: require('typescript'),
+        objectHashIgnoreUnknownHack: true,
+      }),
       postcss({
         plugins: [],
       }),
