@@ -19,6 +19,7 @@ interface PullToRefreshProps {
   resistance?: number;
   backgroundColor?: string;
   className?: string;
+  triggerHeight?: number;
 }
 
 const PullToRefresh: React.FC<PullToRefreshProps> = ({
@@ -35,7 +36,8 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   resistance = 1,
   backgroundColor,
   className = '',
-}) => {
+  triggerHeight = 0,
+}: PullToRefreshProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
   const pullDownRef = useRef<HTMLDivElement>(null);
@@ -168,7 +170,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
     containerRef.current!.classList.add('ptr--dragging');
 
-    if (currentY < startY) {
+    if (currentY < startY + triggerHeight) {
       isDragging = false;
       return;
     }
@@ -177,7 +179,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       e.preventDefault();
     }
       
-    const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
+    const yDistanceMoved = Math.min((currentY - startY - triggerHeight) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
     if (yDistanceMoved >= pullDownThreshold) {
