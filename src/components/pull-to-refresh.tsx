@@ -119,7 +119,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       if (childrenRef.current) {
         childrenRef.current.style.overflowX = 'hidden';
         childrenRef.current.style.overflowY = 'auto';
-        childrenRef.current.style.transform = `translate(0px, 0px)`;
+        childrenRef.current.style.transform = `unset`;
       }
       if (pullDownRef.current) {
         pullDownRef.current.style.opacity = '0';

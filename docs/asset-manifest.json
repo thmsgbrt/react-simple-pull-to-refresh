@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/react-simple-pull-to-refresh/static/css/main.4ed805f0.chunk.css",
-    "main.js": "/react-simple-pull-to-refresh/static/js/main.60884689.chunk.js",
-    "main.js.map": "/react-simple-pull-to-refresh/static/js/main.60884689.chunk.js.map",
+    "main.css": "/react-simple-pull-to-refresh/static/css/main.8aa9810e.chunk.css",
+    "main.js": "/react-simple-pull-to-refresh/static/js/main.3a61f424.chunk.js",
+    "main.js.map": "/react-simple-pull-to-refresh/static/js/main.3a61f424.chunk.js.map",
     "runtime-main.js": "/react-simple-pull-to-refresh/static/js/runtime-main.dd9dbc43.js",
     "runtime-main.js.map": "/react-simple-pull-to-refresh/static/js/runtime-main.dd9dbc43.js.map",
     "static/js/2.ce7fa3e7.chunk.js": "/react-simple-pull-to-refresh/static/js/2.ce7fa3e7.chunk.js",
     "static/js/2.ce7fa3e7.chunk.js.map": "/react-simple-pull-to-refresh/static/js/2.ce7fa3e7.chunk.js.map",
     "index.html": "/react-simple-pull-to-refresh/index.html",
-    "precache-manifest.409be7e9ef7f20ee559ccb0411611cfc.js": "/react-simple-pull-to-refresh/precache-manifest.409be7e9ef7f20ee559ccb0411611cfc.js",
+    "precache-manifest.4eeed1c17041057ff4d8d13a6a8e720e.js": "/react-simple-pull-to-refresh/precache-manifest.4eeed1c17041057ff4d8d13a6a8e720e.js",
     "service-worker.js": "/react-simple-pull-to-refresh/service-worker.js",
-    "static/css/main.4ed805f0.chunk.css.map": "/react-simple-pull-to-refresh/static/css/main.4ed805f0.chunk.css.map"
+    "static/css/main.8aa9810e.chunk.css.map": "/react-simple-pull-to-refresh/static/css/main.8aa9810e.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.dd9dbc43.js",
     "static/js/2.ce7fa3e7.chunk.js",
-    "static/css/main.4ed805f0.chunk.css",
-    "static/js/main.60884689.chunk.js"
+    "static/css/main.8aa9810e.chunk.css",
+    "static/js/main.3a61f424.chunk.js"
   ]
 }
