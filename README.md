@@ -83,6 +83,8 @@ return (
 
 ## Changelog
 
+1.3.2: Fix build issue encountered with 1.3.1
+
 1.3.1: Fix issue preventing fixed elements to work properly - (From: [@ManuDoni](https://github.com/ManuDoni))
 
 1.3.0: Add a _resistance_ prop, that allows to adjust the pull down difficulty - (From: [@joshuahiggins](https://github.com/joshuahiggins))
