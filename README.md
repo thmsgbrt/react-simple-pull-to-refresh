@@ -83,6 +83,8 @@ return (
 
 ## Changelog
 
+1.3.3: Update package.json peerDependencies to support react 18 - (From: [@mjauernig](https://github.com/mjauernig))
+
 1.3.2: Fix build issue encountered with 1.3.1
 
 1.3.1: Fix issue preventing fixed elements to work properly - (From: [@ManuDoni](https://github.com/ManuDoni))
