@@ -45,6 +45,8 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   let isDragging: boolean = false;
   let startY: number = 0;
   let currentY: number = 0;
+  let startX: number = 0;
+  let currentX: number = 0;
 
   useEffect(() => {
     if (!isPullable || !childrenRef || !childrenRef.current) return;
@@ -139,11 +141,14 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     isDragging = false;
     if (e instanceof MouseEvent) {
       startY = e.pageY;
+      startX = e.pageX;
     }
     if (window.TouchEvent && e instanceof TouchEvent) {
       startY = e.touches[0].pageY;
+      startX = e.touches[0].pageX;
     }
     currentY = startY;
+    currentX = startX;
     // Check if element can be scrolled
     if (e.type === 'touchstart' && isTreeScrollable(e.target as HTMLElement, DIRECTION.UP)) {
       return;
@@ -162,8 +167,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
 
     if (window.TouchEvent && e instanceof TouchEvent) {
       currentY = e.touches[0].pageY;
+      currentX = e.touches[0].pageX;
     } else {
       currentY = (e as MouseEvent).pageY;
+      currentX = (e as MouseEvent).pageX;
     }
 
     containerRef.current!.classList.add('ptr--dragging');
@@ -173,10 +180,16 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       return;
     }
 
+    // check if element is being scrolled horizontally
+    if (Math.abs(currentX - startX) > Math.abs(currentY - startY)) {
+      isDragging = false;
+      return;
+    }
+
     if (e.cancelable) {
       e.preventDefault();
     }
-      
+
     const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
