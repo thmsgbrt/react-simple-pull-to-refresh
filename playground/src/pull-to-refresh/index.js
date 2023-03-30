@@ -103,6 +103,8 @@ var PullToRefresh = function (_a) {
     var isDragging = false;
     var startY = 0;
     var currentY = 0;
+    var startX = 0;
+    var currentX = 0;
     useEffect(function () {
         if (!isPullable || !childrenRef || !childrenRef.current)
             return;
@@ -195,11 +197,14 @@ var PullToRefresh = function (_a) {
         isDragging = false;
         if (e instanceof MouseEvent) {
             startY = e.pageY;
+            startX = e.pageX;
         }
         if (window.TouchEvent && e instanceof TouchEvent) {
             startY = e.touches[0].pageY;
+            startX = e.touches[0].pageX;
         }
         currentY = startY;
+        currentX = startX;
         // Check if element can be scrolled
         if (e.type === 'touchstart' && isTreeScrollable(e.target, DIRECTION.UP)) {
             return;
@@ -216,12 +221,19 @@ var PullToRefresh = function (_a) {
         }
         if (window.TouchEvent && e instanceof TouchEvent) {
             currentY = e.touches[0].pageY;
+            currentX = e.touches[0].pageX;
         }
         else {
             currentY = e.pageY;
+            currentX = e.pageX;
         }
         containerRef.current.classList.add('ptr--dragging');
         if (currentY < startY) {
+            isDragging = false;
+            return;
+        }
+        // check if element is being scrolled horizontally
+        if (Math.abs(currentX - startX) > Math.abs(currentY - startY)) {
             isDragging = false;
             return;
         }
