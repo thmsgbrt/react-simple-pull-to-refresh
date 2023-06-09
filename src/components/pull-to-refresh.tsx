@@ -86,7 +86,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     /**
      * Check if it is already in fetching more state
      */
-    if (!containerRef?.current) return;
+    if (!containerRef.current) return;
     const isAlreadyFetchingMore = containerRef.current.classList.contains(
       'ptr--fetch-more-treshold-breached'
     );
@@ -166,7 +166,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       currentY = (e as MouseEvent).pageY;
     }
 
-    containerRef.current!.classList.add('ptr--dragging');
+    containerRef.current?.classList.add('ptr--dragging');
 
     if (currentY < startY) {
       isDragging = false;
@@ -176,22 +176,22 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (e.cancelable) {
       e.preventDefault();
     }
-      
+
     const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
     if (yDistanceMoved >= pullDownThreshold) {
       isDragging = true;
       pullToRefreshThresholdBreached = true;
-      containerRef.current!.classList.remove('ptr--dragging');
-      containerRef.current!.classList.add('ptr--pull-down-treshold-breached');
+      containerRef.current?.classList.remove('ptr--dragging');
+      containerRef.current?.classList.add('ptr--pull-down-treshold-breached');
     }
 
     // maxPullDownDistance breached, stop the animation
     if (yDistanceMoved >= maxPullDownDistance) {
       return;
     }
-    pullDownRef.current!.style.opacity = ((yDistanceMoved) / 65).toString();
+    pullDownRef.current!.style.opacity = (yDistanceMoved / 65).toString();
     childrenRef.current!.style.overflow = 'visible';
     childrenRef.current!.style.transform = `translate(0px, ${yDistanceMoved}px)`;
     pullDownRef.current!.style.visibility = 'visible';
@@ -207,7 +207,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
      */
     if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
       fetchMoreTresholdBreached = true;
-      containerRef.current!.classList.add('ptr--fetch-more-treshold-breached');
+      containerRef.current?.classList.add('ptr--fetch-more-treshold-breached');
       onFetchMore().then(initContainer).catch(initContainer);
     }
   };
