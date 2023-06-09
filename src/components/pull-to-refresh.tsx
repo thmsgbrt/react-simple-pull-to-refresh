@@ -86,7 +86,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     /**
      * Check if it is already in fetching more state
      */
-    if (!containerRef?.current) return;
+    if (!containerRef.current) return;
     const isAlreadyFetchingMore = containerRef.current.classList.contains(
       'ptr--fetch-more-treshold-breached'
     );
@@ -166,7 +166,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
       currentY = (e as MouseEvent).pageY;
     }
 
-    containerRef.current!.classList.add('ptr--dragging');
+    containerRef.current?.classList.add('ptr--dragging');
 
     if (currentY < startY) {
       isDragging = false;

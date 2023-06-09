@@ -1,6 +1,6 @@
 {
-  "name": "react-simple-pull-to-refresh",
-  "version": "1.3.3",
+  "name": "@johnsonsu/react-simple-pull-to-refresh",
+  "version": "1.3.4",
   "description": "A Simple Pull To Refresh Component for React Application",
   "main": "build/index.cjs.js",
   "module": "build/index.esm.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thmsgbrt/react-simple-pull-to-refresh.git"
+    "url": "git+https://github.com/johnsonsu/react-simple-pull-to-refresh.git"
   },
   "keywords": [
     "react",
@@ -24,9 +24,9 @@
   "author": "Guibert Thomas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thmsgbrt/react-simple-pull-to-refresh/issues"
+    "url": "https://github.com/johnsonsu/react-simple-pull-to-refresh/issues"
   },
-  "homepage": "https://github.com/thmsgbrt/react-simple-pull-to-refresh#readme",
+  "homepage": "https://github.com/johnsonsu/react-simple-pull-to-refresh#readme",
   "devDependencies": {
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
