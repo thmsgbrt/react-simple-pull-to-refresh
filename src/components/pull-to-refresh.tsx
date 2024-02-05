@@ -47,26 +47,32 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   let currentY: number = 0;
 
   useEffect(() => {
-    if (!isPullable || !childrenRef || !childrenRef.current) return;
-    const childrenEl = childrenRef.current;
-    childrenEl.addEventListener('touchstart', onTouchStart, { passive: true });
-    childrenEl.addEventListener('mousedown', onTouchStart);
-    childrenEl.addEventListener('touchmove', onTouchMove, { passive: false });
-    childrenEl.addEventListener('mousemove', onTouchMove);
+    if (!childrenRef || !childrenRef.current) return;
+
     window.addEventListener('scroll', onScroll);
-    childrenEl.addEventListener('touchend', onEnd);
-    childrenEl.addEventListener('mouseup', onEnd);
-    document.body.addEventListener('mouseleave', onEnd);
+
+    const childrenEl = childrenRef.current;
+    if(isPullable) {
+      childrenEl.addEventListener('touchstart', onTouchStart, { passive: true });
+      childrenEl.addEventListener('mousedown', onTouchStart);
+      childrenEl.addEventListener('touchmove', onTouchMove, { passive: false });
+      childrenEl.addEventListener('mousemove', onTouchMove);
+      childrenEl.addEventListener('touchend', onEnd);
+      childrenEl.addEventListener('mouseup', onEnd);
+      document.body.addEventListener('mouseleave', onEnd);
+    }
 
     return () => {
-      childrenEl.removeEventListener('touchstart', onTouchStart);
-      childrenEl.removeEventListener('mousedown', onTouchStart);
-      childrenEl.removeEventListener('touchmove', onTouchMove);
-      childrenEl.removeEventListener('mousemove', onTouchMove);
       window.removeEventListener('scroll', onScroll);
-      childrenEl.removeEventListener('touchend', onEnd);
-      childrenEl.removeEventListener('mouseup', onEnd);
-      document.body.removeEventListener('mouseleave', onEnd);
+      if(isPullable) {
+        childrenEl.removeEventListener('touchstart', onTouchStart);
+        childrenEl.removeEventListener('mousedown', onTouchStart);
+        childrenEl.removeEventListener('touchmove', onTouchMove);
+        childrenEl.removeEventListener('mousemove', onTouchMove);
+        childrenEl.removeEventListener('touchend', onEnd);
+        childrenEl.removeEventListener('mouseup', onEnd);
+        document.body.removeEventListener('mouseleave', onEnd);
+      }
     };
   }, [
     children,
