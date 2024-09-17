@@ -3,7 +3,7 @@ import { isTreeScrollable } from '../isScrollable';
 import RefreshingContent from './refreshing-content';
 import PullingContent from './pulling-content';
 import { DIRECTION } from '../types';
-import '../styles/main.scss';
+import '../styles/main.css';
 
 interface PullToRefreshProps {
   isPullable?: boolean;
@@ -176,7 +176,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (e.cancelable) {
       e.preventDefault();
     }
-      
+
     const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
@@ -191,7 +191,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (yDistanceMoved >= maxPullDownDistance) {
       return;
     }
-    pullDownRef.current!.style.opacity = ((yDistanceMoved) / 65).toString();
+    pullDownRef.current!.style.opacity = (yDistanceMoved / 65).toString();
     childrenRef.current!.style.overflow = 'visible';
     childrenRef.current!.style.transform = `translate(0px, ${yDistanceMoved}px)`;
     pullDownRef.current!.style.visibility = 'visible';
