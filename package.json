@@ -5,7 +5,8 @@
   "main": "build/index.cjs.js",
   "module": "build/index.esm.js",
   "scripts": {
-    "build": "rollup -c && cd playground && npm run build && cd ../ && ncp ./playground/build ./docs",
+    "build-playground": "cd playground && npm run build && cd ../ && ncp ./playground/build ./docs",
+    "build": "rollup -c",
     "build-watch": "rollup -c -w",
     "dev": "npm-run-all --parallel build-watch start-playground",
     "i-all": "npm i && cd playground && npm i",
