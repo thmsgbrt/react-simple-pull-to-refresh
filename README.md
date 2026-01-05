@@ -83,6 +83,8 @@ return (
 
 ## Changelog
 
+1.3.4: Update package.json peerDependencies to support react 19 - (From: [@redimongo](https://github.com/redimongo))
+
 1.3.3: Update package.json peerDependencies to support react 18 - (From: [@mjauernig](https://github.com/mjauernig))
 
 1.3.2: Fix build issue encountered with 1.3.1
