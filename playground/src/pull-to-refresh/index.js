@@ -139,11 +139,10 @@ var PullToRefresh = function (_a) {
      *  if fetchMoreThreshold is already breached
      */
     useEffect(function () {
-        var _a;
         /**
          * Check if it is already in fetching more state
          */
-        if (!((_a = containerRef) === null || _a === void 0 ? void 0 : _a.current))
+        if (!containerRef.current)
             return;
         var isAlreadyFetchingMore = containerRef.current.classList.contains('ptr--fetch-more-treshold-breached');
         if (isAlreadyFetchingMore)
@@ -211,6 +210,7 @@ var PullToRefresh = function (_a) {
         isDragging = true;
     };
     var onTouchMove = function (e) {
+        var _a, _b, _c;
         if (!isDragging) {
             return;
         }
@@ -220,7 +220,7 @@ var PullToRefresh = function (_a) {
         else {
             currentY = e.pageY;
         }
-        containerRef.current.classList.add('ptr--dragging');
+        (_a = containerRef.current) === null || _a === void 0 ? void 0 : _a.classList.add('ptr--dragging');
         if (currentY < startY) {
             isDragging = false;
             return;
@@ -233,19 +233,20 @@ var PullToRefresh = function (_a) {
         if (yDistanceMoved >= pullDownThreshold) {
             isDragging = true;
             pullToRefreshThresholdBreached = true;
-            containerRef.current.classList.remove('ptr--dragging');
-            containerRef.current.classList.add('ptr--pull-down-treshold-breached');
+            (_b = containerRef.current) === null || _b === void 0 ? void 0 : _b.classList.remove('ptr--dragging');
+            (_c = containerRef.current) === null || _c === void 0 ? void 0 : _c.classList.add('ptr--pull-down-treshold-breached');
         }
         // maxPullDownDistance breached, stop the animation
         if (yDistanceMoved >= maxPullDownDistance) {
             return;
         }
-        pullDownRef.current.style.opacity = ((yDistanceMoved) / 65).toString();
+        pullDownRef.current.style.opacity = (yDistanceMoved / 65).toString();
         childrenRef.current.style.overflow = 'visible';
         childrenRef.current.style.transform = "translate(0px, " + yDistanceMoved + "px)";
         pullDownRef.current.style.visibility = 'visible';
     };
     var onScroll = function (e) {
+        var _a;
         /**
          * Check if component has already called onFetchMore
          */
@@ -256,7 +257,7 @@ var PullToRefresh = function (_a) {
          */
         if (canFetchMore && getScrollToBottomValue() < fetchMoreThreshold && onFetchMore) {
             fetchMoreTresholdBreached = true;
-            containerRef.current.classList.add('ptr--fetch-more-treshold-breached');
+            (_a = containerRef.current) === null || _a === void 0 ? void 0 : _a.classList.add('ptr--fetch-more-treshold-breached');
             onFetchMore().then(initContainer).catch(initContainer);
         }
     };
