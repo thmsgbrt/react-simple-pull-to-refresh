@@ -176,7 +176,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (e.cancelable) {
       e.preventDefault();
     }
-      
+
     const yDistanceMoved = Math.min((currentY - startY) / resistance, maxPullDownDistance);
 
     // Limit to trigger refresh has been breached
@@ -191,7 +191,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     if (yDistanceMoved >= maxPullDownDistance) {
       return;
     }
-    pullDownRef.current!.style.opacity = ((yDistanceMoved) / 65).toString();
+    pullDownRef.current!.style.opacity = (yDistanceMoved / 65).toString();
     childrenRef.current!.style.overflow = 'visible';
     childrenRef.current!.style.transform = `translate(0px, ${yDistanceMoved}px)`;
     pullDownRef.current!.style.visibility = 'visible';
@@ -237,7 +237,11 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
         <div className="ptr__loader ptr__pull-down--loading">{refreshingContent}</div>
         <div className="ptr__pull-down--pull-more">{pullingContent}</div>
       </div>
-      <div className="ptr__children" ref={childrenRef}>
+      <div
+        className="ptr__children"
+        style={{ overflow: 'hidden auto', transform: 'unset' }}
+        ref={childrenRef}
+      >
         {children}
         <div className="ptr__fetch-more" ref={fetchMoreRef}>
           <div className="ptr__loader ptr__fetch-more--loading">{refreshingContent}</div>
